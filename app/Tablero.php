@@ -1,32 +1,66 @@
 <?php 
 
-namespace App
+  namespace App
 
-class Tablero{
+  class Tablero{
 
-    protected $fichaOrder;
+  public $row;
+  public $col;
+  public $var;
+  public $order;
+  public $rdertop;
 
-    //Variable para guardar la posicion de las fichas (1-7)
+  public $tablero = array (
+  array("⚫","⚫","⚫","⚫","⚫","⚫","⚫"),
+  array("⚫","⚫","⚫","⚫","⚫","⚫","⚫"),
+  array("⚫","⚫","⚫","⚫","⚫","⚫","⚫"),
+  array("⚫","⚫","⚫","⚫","⚫","⚫","⚫"),
+  array("⚫","⚫","⚫","⚫","⚫","⚫","⚫"),
+  array("⚫","⚫","⚫","⚫","⚫","⚫","⚫")
+);  
 
-    protected function __construc(){
-
-        restart();
-
-    //Reiniciar la posicion guardada
-
+  public function start(){
+    for ($row = 0; $row < 8; $row++) {
+      echo "\n";
+    for ($col = 0; $col < 7; $col++) {
+      echo $this->tablero[$row][$col];
     }
-
-    public function showBoard(){
-
-        echo $fichaOrder;
-
-    //Muestra la posicion
-
     }
-
-    public function addFicha(){
-
-    }
-
 }
+
+
+  public function addFicha(){
+    $order=0;
+    $ordertop=5;
+    
+    while(true){
+    print "Ingrese posicion: ";
+    fscanf(STDIN, "%d" ,$var);
+    $var = $var-1;
+
+    if($this->tablero[$ordertop][$var] == "🔴" or $this->tablero[$ordertop][$var] == "🔵"){
+      $ordertop--;
+    }else{
+      while($this->tablero[$ordertop][$var] == "⚫" and $ordertop<5){
+        $ordertop++;
+      }
+    }
+      
+    if(fmod($order,2)==0){
+    $this->tablero[$ordertop][$var] = "🔴";
+    } else{
+    $this->tablero[$ordertop][$var] = "🔵";
+    }
+  
+    $this->start();
+    $order++;
+  }
+  }
+   
+}
+
+/*$Tab = new Tablero();
+$Tab->start();
+$Tab->addFicha();*/
+
 ?>
